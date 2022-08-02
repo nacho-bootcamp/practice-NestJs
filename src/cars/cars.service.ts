@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class CarsService {
@@ -26,6 +27,9 @@ export class CarsService {
 
   findOneById(id: number) {
     const car = this.cars.find((car) => car.id === id);
+
+    if (!car) throw new NotFoundException(`Car with id "${id}"not found`);
     return car;
   }
 }
+// cuado se tiene un if con una sola linea se puede quitar las llaves y si la condicion se cumple envia el msj i no se cumple retorna el car
