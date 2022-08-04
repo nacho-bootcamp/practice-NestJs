@@ -29,7 +29,7 @@ export class CarsController {
   }
   @Post() // peticion para crear data y recibimos el body con e decorador body
   createCar(@Body() createCardDto: CreateCarDto) {
-    return createCardDto;
+    return this.carsService.create(createCardDto);
   }
 
   @Patch(':id')
