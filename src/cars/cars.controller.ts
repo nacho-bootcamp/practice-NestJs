@@ -5,10 +5,13 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDto } from './dto/create-car.dto';
+
 //los controladores escuchan la peticiones y dan una respuesta
 @Controller('cars')
 export class CarsController {
@@ -18,14 +21,15 @@ export class CarsController {
     return this.carsService.findAll();
   }
   @Get(':id') // si queremos algunos parametros del url sin que se repita (:id/:status)si se quiere leer el estado
-  getCarById(@Param('id') id: string) {
+  getCarById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    // se agrega una nueva instancia y se agrega que tipo de version es el uuid ej: new pipesuuid({version:"4"})
     //para obtener el parametro por el id se usa eñ @param("id")
 
     return this.carsService.findOneById(id);
   }
   @Post() // peticion para crear data y recibimos el body con e decorador body
-  createCar(@Body() body: any) {
-    return body;
+  createCar(@Body() createCardDto: CreateCarDto) {
+    return createCardDto;
   }
 
   @Patch(':id')
