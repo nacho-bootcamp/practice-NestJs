@@ -12,16 +12,16 @@ import { CarsService } from './cars.service';
 //los controladores escuchan la peticiones y dan una respuesta
 @Controller('cars')
 export class CarsController {
-  constructor(private readonly CarsService: CarsService) {}
+  constructor(private readonly carsService: CarsService) {}
   @Get() //para peticiones get directamente slash de este  url
   getAllCars() {
-    return this.CarsService.findAll;
+    return this.carsService.findAll();
   }
   @Get(':id') // si queremos algunos parametros del url sin que se repita (:id/:status)si se quiere leer el estado
-  getCarById(@Param('id', ParseIntPipe) id: number) {
+  getCarById(@Param('id') id: string) {
     //para obtener el parametro por el id se usa eñ @param("id")
 
-    return this.CarsService.findOneById(id);
+    return this.carsService.findOneById(id);
   }
   @Post() // peticion para crear data y recibimos el body con e decorador body
   createCar(@Body() body: any) {
