@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update.car.dto';
 
 //los controladores escuchan la peticiones y dan una respuesta
 @Controller('cars')
@@ -33,9 +34,12 @@ export class CarsController {
   }
 
   @Patch(':id')
-  updateCar(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
+  updateCar(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updatecarDto: UpdateCarDto,
+  ) {
     // cuando son mas de uno de define de esta manera el paht recibe el id y el body
-    return body;
+    return this.carsService.update(id, updatecarDto);
   }
   @Delete(':id')
   deleteCar(@Param('id', ParseIntPipe) id: number) {
