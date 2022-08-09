@@ -10,21 +10,21 @@ import { UpdateCarDto, CreateCarDto } from './dto';
 @Injectable()
 export class CarsService {
   private cars: Car[] = [
-    {
-      id: uuid(), // el uuid te proporrciona un id unico y el id pasaria a ser un string $_yarn add uuid $_yarn add -D @types/uuid
-      brand: 'Ferrari',
-      model: 2018,
-    },
-    {
-      id: uuid(),
-      brand: 'Honda',
-      model: 2018,
-    },
-    {
-      id: uuid(),
-      brand: 'Jeep',
-      model: 2018,
-    },
+    // {
+    //   id: uuid(), // el uuid te proporrciona un id unico y el id pasaria a ser un string $_yarn add uuid $_yarn add -D @types/uuid
+    //   brand: 'Ferrari',
+    //   model: 2018,
+    // },
+    // {
+    //   id: uuid(),
+    //   brand: 'Honda',
+    //   model: 2018,
+    // },
+    // {
+    //   id: uuid(),
+    //   brand: 'Jeep',
+    //   model: 2018,
+    // },
   ];
 
   findAll() {
@@ -69,5 +69,8 @@ export class CarsService {
   delete(id: string) {
     const car = this.findOneById(id);
     this.cars = this.cars.filter((car) => car.id !== id);
+  }
+  fillCarsWithSeedData(cars: Car[]) {
+    this.cars = cars;
   }
 }
